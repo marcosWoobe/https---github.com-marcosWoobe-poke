@@ -1,6 +1,6 @@
 /**
  * The Forgotten Server - a free and open-source MMORPG server emulator
- * Copyright (C) 2016  Mark Samman <mark.samman@gmail.com>
+ * Copyright (C) 2018  Mark Samman <mark.samman@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -254,7 +254,7 @@ void Connection::internalSend(const OutputMessage_ptr& msg)
 {
 	protocol->onSendMessage(msg);
 	try {
-		writeTimer.expires_from_now(boost::posix_time::seconds(Connection::write_timeout));
+		writeTimer.expires_from_now(boost::posix_time::seconds(CONNECTION_WRITE_TIMEOUT));
 		writeTimer.async_wait(std::bind(&Connection::handleTimeout, std::weak_ptr<Connection>(shared_from_this()),
 		                                     std::placeholders::_1));
 
