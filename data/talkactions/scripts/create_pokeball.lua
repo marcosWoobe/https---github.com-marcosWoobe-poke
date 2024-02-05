@@ -27,13 +27,19 @@ function onSay(player, words, param)
 		boost = 0
 	end
 
+	local love = tonumber(split[4])
+	if love == nil then
+		love = 0
+	end
+
 	local result = player:addItem(26670, 1, false, 1, CONST_SLOT_BACKPACK)
 	if result ~= nil then
 		local baseHealth = monsterType:getMaxHealth()
-		local maxHealth = math.floor(baseHealth * statusGainFormula(player:getLevel(), level, boost))
+		local maxHealth = math.floor(baseHealth * statusGainFormula(player:getLevel(), level, boost, love))
 		result:setSpecialAttribute("pokeName", name)
 		result:setSpecialAttribute("pokeLevel", level)
 		result:setSpecialAttribute("pokeBoost", boost)
+		result:setSpecialAttribute("pokeLove", love)
 		result:setSpecialAttribute("pokeExperience", getNeededExp(level))
 		result:setSpecialAttribute("pokeMaxHealth", maxHealth)
 		result:setSpecialAttribute("pokeHealth", maxHealth)
